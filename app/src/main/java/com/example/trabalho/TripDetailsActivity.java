@@ -29,30 +29,31 @@ public class TripDetailsActivity extends AppCompatActivity implements RequestFor
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.tripDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_trip_details);
+        this.tripDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_trip_details); //escolhe o layout
 
-        Intent intent = getIntent();
-        this.trip = intent.getParcelableExtra("objTrip");
-        this.tripDetailsBinding.setTrip(trip);
+        Intent intent = getIntent(); // busca a intent
+        this.trip = intent.getParcelableExtra("objTrip"); //traz a intent que veio da tela anterior
+        this.tripDetailsBinding.setTrip(trip); // variavel trip da xml
 
-        tripDetailsPresenter = new TripDetailsPresenter(this, this, this, trip);
+        tripDetailsPresenter = new TripDetailsPresenter(this, this, this, trip); //aciona a presenter q vai fazer a merda acontecer
+                                                                                                            //com os dados que vieram de antes
     }
 
     @Override
     public void bindList(List<Forecast> forecastArrayList) {
         try {
-            RecyclerView recyclerView = findViewById(R.id.recyclerViewForecast);
+            RecyclerView recyclerView = findViewById(R.id.recyclerViewForecast); //aponta onde vai salvar os dados
             LinearLayoutManager linearLayoutManagerHorinzontal = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false);
             recyclerView.setLayoutManager(linearLayoutManagerHorinzontal);
 
             ForecastAdapter forecastAdapter = new ForecastAdapter(forecastArrayList);
-            recyclerView.setAdapter(forecastAdapter);
+            recyclerView.setAdapter(forecastAdapter); // seta o adapter do recyclerView
 
             Forecast forecastDeparture = this.tripDetailsPresenter.findForecast(this.trip.getDepartureDate(), "Actual");
             Forecast forecastArrival = this.tripDetailsPresenter.findForecast(this.trip.getArrivalDate(), "Destiny");
 
             this.tripDetailsBinding.setForecastArrival(forecastArrival);
-            this.tripDetailsBinding.setForecastDeparture(forecastDeparture);
+            this.tripDetailsBinding.setForecastDeparture(forecastDeparture); //faz o binding dos dados de partida e cria a variavel do xml
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -34,8 +34,8 @@ public class TripDetailsPresenter implements RequestForecastContract.RequestFore
         this.tripDetailsForecastView = viewForecast;
         this.trip = trip;
 
-        Location location = new Location(activity, this);
-        location.getLastLocation();
+        Location location = new Location(activity, this); // aqui é onde pega a última localização do dispositivo
+        location.getLastLocation(); //retorno dos dados de última localização
     }
 
     @Override
@@ -76,7 +76,7 @@ public class TripDetailsPresenter implements RequestForecastContract.RequestFore
 
     @Override
     public void getLocation(LocationGeo locationGeo) {
-        this.locationGeo = locationGeo;
+        this.locationGeo = locationGeo; //setando o model da location pra pegar as informações depois
         this.start();
     }
 
