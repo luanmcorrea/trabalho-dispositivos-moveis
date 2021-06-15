@@ -54,10 +54,9 @@ public class Location {
                                     location.getAccuracy()
                             );
 
-                            presenter.getLocation(locationGeo);
+                            presenter.getLocation(locationGeo); //vai colocar os dados na presenter <MUITO IMPORTANTE>
                         }
                     }
                 });
     }
-
 }
